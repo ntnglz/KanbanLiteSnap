@@ -1,3 +1,5 @@
+![KanbanLiteSnap Logo](KanbanLiteSnap/Assets.xcassets/AppIcon.appiconset/AppIcon1024.png)
+
 # KanbanLiteSnap
 
 KanbanLiteSnap es una aplicación minimalista de gestión de tareas basada en el método Kanban, desarrollada en SwiftUI y SwiftData para macOS/iOS.
