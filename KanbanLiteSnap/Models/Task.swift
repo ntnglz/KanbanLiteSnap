@@ -2,6 +2,9 @@ import Foundation
 import SwiftUI
 import SwiftData
 
+// Modelos de datos persistentes para KanbanLiteSnap
+
+/// Representa el estado de una tarea en el flujo Kanban.
 enum TaskStatus: String, CaseIterable {
     case ideas = "IDEAS"        // Antes TODO
     case focus = "FOCUS"        // Antes DOING
@@ -24,6 +27,7 @@ enum TaskStatus: String, CaseIterable {
     }
 }
 
+/// Representa un tipo de tarea (categoría) personalizable por el usuario.
 @Model
 final class TaskType {
     @Attribute(.unique) var id: UUID
@@ -45,6 +49,7 @@ final class TaskType {
     var displayName: String { name }
 }
 
+/// Representa una tarea individual en el sistema Kanban.
 @Model
 final class Task {
     @Attribute(.unique) var id: UUID

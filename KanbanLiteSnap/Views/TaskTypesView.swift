@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 
+/// Vista para gestionar los tipos de tarea (añadir, eliminar, listar).
 struct TaskTypesView: View {
     @Query(sort: [SortDescriptor(\TaskType.name)]) var taskTypes: [TaskType]
     @Environment(\.modelContext) private var modelContext

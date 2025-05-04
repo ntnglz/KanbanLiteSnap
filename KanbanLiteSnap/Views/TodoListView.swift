@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 
+/// Vista que muestra todas las ideas pendientes agrupadas por tipo, permite añadir nuevas tareas y moverlas a Focus.
 struct TodoListView: View {
     @Query(sort: [SortDescriptor(\Task.createdAt)]) var tasks: [Task]
     @Query(sort: [SortDescriptor(\TaskType.name)]) var taskTypes: [TaskType]
@@ -71,6 +72,7 @@ struct TodoListView: View {
     }
 }
 
+/// Sección expandible/colapsable para mostrar tareas de un tipo concreto.
 struct TaskTypeSectionView: View {
     let group: (type: TaskType?, tasks: [Task])
     let isExpanded: Bool
@@ -111,6 +113,7 @@ struct TaskTypeSectionView: View {
     }
 }
 
+/// Sheet para añadir una nueva tarea desde la vista de Ideas.
 struct AddTaskSheet: View {
     var taskTypes: [TaskType]
     var onAdd: (String, String?, TaskType?) -> Void

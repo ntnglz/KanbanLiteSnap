@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 
+/// Vista que muestra las tareas completadas (Achievements) y permite restaurarlas o eliminarlas.
 struct DoneListView: View {
     @Query(sort: [SortDescriptor(\Task.createdAt)]) var tasks: [Task]
     @Environment(\.modelContext) private var modelContext
