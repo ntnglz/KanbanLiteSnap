@@ -11,6 +11,15 @@ struct ContentView: View {
     @State private var showingTaskTypes = false
     @State private var showingAddType = false
     
+    let focusMotivationalTitles = [
+        "Stay focused and get things done!",
+        "One step closer to your goals",
+        "Keep pushing forward",
+        "You're making progress!",
+        "Focus brings results"
+    ]
+    @State private var selectedFocusTitle: String = ""
+    
     var focusTasks: [Task] {
         tasks.filter { $0.status == .focus }
     }
@@ -53,7 +62,12 @@ struct ContentView: View {
                         }
                     }
                 }
-                .navigationTitle(TaskStatus.focus.displayName)
+                .navigationTitle(selectedFocusTitle)
+                .onAppear {
+                    if selectedFocusTitle.isEmpty {
+                        selectedFocusTitle = focusMotivationalTitles.randomElement()!
+                    }
+                }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: { showingTodoList = true }) {

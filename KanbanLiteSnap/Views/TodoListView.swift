@@ -10,6 +10,14 @@ struct TodoListView: View {
     @State private var expandedTypes: Set<UUID> = []
     @Environment(\.dismiss) var dismiss
     private let noTypeUUID = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
+    let motivationalTitles = [
+        "Today is a great day for new ideas!",
+        "Let your creativity flow",
+        "Every idea matters",
+        "Get inspired and jot it down!",
+        "The first step is to imagine"
+    ]
+    @State private var selectedTitle: String = ""
     
     var groupedTasks: [(groupId: UUID, type: TaskType?, tasks: [Task])] {
         let ideas = tasks.filter { $0.status == .ideas }
@@ -47,7 +55,7 @@ struct TodoListView: View {
                     )
                 }
             }
-            .navigationTitle(TaskStatus.ideas.displayName)
+            .navigationTitle(selectedTitle)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showingAddTask = true }) {
@@ -69,6 +77,9 @@ struct TodoListView: View {
             }
             .onAppear {
                 expandedTypes = Set(allGroupIds)
+                if selectedTitle.isEmpty {
+                    selectedTitle = motivationalTitles.randomElement()!
+                }
             }
             .onChange(of: tasks.count) {
                 expandedTypes = Set(allGroupIds)
