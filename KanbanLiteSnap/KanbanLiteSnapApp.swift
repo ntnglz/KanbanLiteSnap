@@ -9,11 +9,24 @@ import SwiftUI
 import SwiftData
 
 @main
-struct Kanban_LiteSnapApp: App {
+struct KanbanLiteSnapApp: App {
+    let modelContainer: ModelContainer
+    
+    init() {
+        do {
+            modelContainer = try ModelContainer(
+                for: Task.self, TaskType.self,
+                configurations: ModelConfiguration(isStoredInMemoryOnly: false)
+            )
+        } catch {
+            fatalError("Could not initialize ModelContainer")
+        }
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
-        .modelContainer(for: [Task.self, TaskType.self])
+        .modelContainer(modelContainer)
     }
 }
