@@ -52,7 +52,29 @@ struct ContentView: View {
             }
         } else {
             NavigationView {
-                VStack {
+                ZStack(alignment: .bottom) {
+                    VStack(spacing: 16) {
+                        Image("AppLogo")
+                            .resizable()
+                            .frame(width: 256, height: 256)
+                            .opacity(0.25)
+                        Text("Welcome to your Focus board!")
+                            .font(.headline)
+                            .opacity(0.25)
+                        Text("""
+• Here you see the tasks you're actively working on.
+• Mark a task as done with the green checkmark.
+• Use the toolbar to navigate to Ideas, Done, or Task Types.
+• Stay focused and keep making progress!
+""")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.center)
+                            .opacity(0.25)
+                    }
+                    .padding(.bottom, 40)
+                    .frame(maxWidth: .infinity)
+                    
                     List {
                         ForEach(focusTasks) { task in
                             TaskRow(task: task, moveToDone: {
@@ -61,6 +83,8 @@ struct ContentView: View {
                             })
                         }
                     }
+                    .background(Color.clear)
+                    .scrollContentBackground(.hidden)
                 }
                 .navigationTitle(selectedFocusTitle)
                 .onAppear {

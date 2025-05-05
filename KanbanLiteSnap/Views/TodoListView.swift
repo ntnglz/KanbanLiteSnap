@@ -33,27 +33,53 @@ struct TodoListView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(groupedTasks, id: \.groupId) { group in
-                    let groupId = group.groupId
-                    TaskTypeSectionView(
-                        group: (type: group.type, tasks: group.tasks),
-                        isExpanded: expandedTypes.contains(groupId),
-                        toggle: {
-                            if expandedTypes.contains(groupId) {
-                                expandedTypes.remove(groupId)
-                            } else {
-                                expandedTypes.insert(groupId)
-                            }
-                        },
-                        moveToFocus: { task in
-                            withAnimation {
-                                task.status = .focus
-                                try? modelContext.save()
-                            }
-                        }
-                    )
+            ZStack(alignment: .bottom) {
+                VStack(spacing: 16) {
+                    Image("AppLogo")
+                        .resizable()
+                        .frame(width: 256, height: 256)
+                        .opacity(0.25)
+                    Text("Welcome to your Ideas board!")
+                        .font(.headline)
+                        .opacity(0.25)
+                    Text("""
+• Here you can jot down any idea or task you want to remember.
+• Tap the '+' button to add a new idea.
+• Use the blue arrow to move an idea to Focus when you're ready to work on it.
+• Ideas are grouped by type for better organization.
+""")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .opacity(0.25)
                 }
+                .padding(.bottom, 40)
+                .frame(maxWidth: .infinity)
+                
+                List {
+                    ForEach(groupedTasks, id: \.groupId) { group in
+                        let groupId = group.groupId
+                        TaskTypeSectionView(
+                            group: (type: group.type, tasks: group.tasks),
+                            isExpanded: expandedTypes.contains(groupId),
+                            toggle: {
+                                if expandedTypes.contains(groupId) {
+                                    expandedTypes.remove(groupId)
+                                } else {
+                                    expandedTypes.insert(groupId)
+                                }
+                            },
+                            moveToFocus: { task in
+                                withAnimation {
+                                    task.status = .focus
+                                    try? modelContext.save()
+                                }
+                            }
+                        )
+                    }
+                }
+                .background(Color.clear)
+                .scrollContentBackground(.hidden)
             }
             .navigationTitle(selectedTitle)
             .toolbar {
