@@ -11,11 +11,11 @@ struct TodoListView: View {
     @Environment(\.dismiss) var dismiss
     private let noTypeUUID = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
     let motivationalTitles = [
-        "Today is a great day for new ideas!",
-        "Let your creativity flow",
-        "Every idea matters",
-        "Get inspired and jot it down!",
-        "The first step is to imagine"
+        "ideas.motivational.1".localized,
+        "ideas.motivational.2".localized,
+        "ideas.motivational.3".localized,
+        "ideas.motivational.4".localized,
+        "ideas.motivational.5".localized
     ]
     @State private var selectedTitle: String = ""
     
@@ -39,15 +39,10 @@ struct TodoListView: View {
                         .resizable()
                         .frame(width: 256, height: 256)
                         .opacity(0.25)
-                    Text("Welcome to your Ideas board!")
+                    Text("ideas.welcome".localized)
                         .font(.headline)
                         .opacity(0.25)
-                    Text("""
-• Here you can jot down any idea or task you want to remember.
-• Tap the '+' button to add a new idea.
-• Use the blue arrow to move an idea to Focus when you're ready to work on it.
-• Ideas are grouped by type for better organization.
-""")
+                    Text("ideas.instructions".localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -90,7 +85,7 @@ struct TodoListView: View {
                 }
             }
             .navigationBarItems(
-                leading: Button("Done") {
+                leading: Button("common.done".localized) {
                     dismiss()
                 }
             )
@@ -124,7 +119,7 @@ struct TaskTypeSectionView: View {
     
     var body: some View {
         Section(header: HStack {
-            Text(group.type?.name ?? "Sin tipo")
+            Text(group.type?.name ?? "common.none".localized)
                 .font(.headline)
             Spacer()
             Button(action: toggle) {
@@ -167,13 +162,13 @@ struct AddTaskSheet: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Task Details")) {
-                    TextField("Title", text: $taskTitle)
-                    TextField("Description (optional)", text: $taskDescription)
+                Section(header: Text("common.title".localized)) {
+                    TextField("common.title".localized, text: $taskTitle)
+                    TextField("common.description".localized, text: $taskDescription)
                 }
-                Section(header: Text("Task Type")) {
-                    Picker("Type", selection: $selectedTaskType) {
-                        Text("None").tag(nil as TaskType?)
+                Section(header: Text("common.type".localized)) {
+                    Picker("common.type".localized, selection: $selectedTaskType) {
+                        Text("common.none".localized).tag(nil as TaskType?)
                         ForEach(taskTypes) { type in
                             HStack {
                                 Image(systemName: type.icon)
@@ -184,10 +179,10 @@ struct AddTaskSheet: View {
                     }
                 }
             }
-            .navigationTitle("New Task")
+            .navigationTitle("common.add".localized)
             .navigationBarItems(
-                leading: Button("Cancel") { dismiss() },
-                trailing: Button("Add") {
+                leading: Button("common.cancel".localized) { dismiss() },
+                trailing: Button("common.add".localized) {
                     if !taskTitle.isEmpty {
                         onAdd(taskTitle, taskDescription.isEmpty ? nil : taskDescription, selectedTaskType)
                         dismiss()

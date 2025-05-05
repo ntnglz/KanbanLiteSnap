@@ -21,15 +21,10 @@ struct DoneListView: View {
                         .resizable()
                         .frame(width: 256, height: 256)
                         .opacity(0.25)
-                    Text("Welcome to your Achievements board!")
+                    Text("achievements.welcome".localized)
                         .font(.headline)
                         .opacity(0.25)
-                    Text("""
-• Here you'll see all the tasks you've completed.
-• Restore a task to Focus with the blue arrow.
-• Remove tasks permanently with the trash icon.
-• Celebrate your progress!
-""")
+                    Text("achievements.instructions".localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -84,20 +79,20 @@ struct DoneListView: View {
                 .background(Color.clear)
                 .scrollContentBackground(.hidden)
             }
-            .navigationTitle(TaskStatus.achievements.displayName)
+            .navigationTitle("status.achievements".localized)
             .navigationBarItems(
-                leading: Button("Done") {
+                leading: Button("common.done".localized) {
                     dismiss()
                 }
             )
-            .alert("Delete Task", isPresented: .init(
+            .alert("common.delete".localized, isPresented: .init(
                 get: { taskToDelete != nil },
                 set: { if !$0 { taskToDelete = nil } }
             )) {
-                Button("Cancel", role: .cancel) {
+                Button("common.cancel".localized, role: .cancel) {
                     taskToDelete = nil
                 }
-                Button("Delete", role: .destructive) {
+                Button("common.delete".localized, role: .destructive) {
                     if let task = taskToDelete {
                         modelContext.delete(task)
                         try? modelContext.save()

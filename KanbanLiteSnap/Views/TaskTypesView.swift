@@ -38,9 +38,9 @@ struct TaskTypesView: View {
                     }
                 }
             }
-            .navigationTitle("Task Types")
+            .navigationTitle("taskTypes.title".localized)
             .navigationBarItems(
-                leading: Button("Done") {
+                leading: Button("common.done".localized) {
                     dismiss()
                 },
                 trailing: Button(action: { showingAddType = true }) {
@@ -49,9 +49,9 @@ struct TaskTypesView: View {
             )
             .sheet(isPresented: $showingAddType) {
                 Form {
-                    TextField("Type Name", text: $newTypeName)
-                    Section(header: Text("Icono")) {
-                        Picker("Icono", selection: $newTypeIcon) {
+                    TextField("taskTypes.name".localized, text: $newTypeName)
+                    Section(header: Text("taskTypes.icon".localized)) {
+                        Picker("taskTypes.icon".localized, selection: $newTypeIcon) {
                             ForEach(icons, id: \.self) { icon in
                                 HStack {
                                     Image(systemName: icon)
@@ -61,8 +61,8 @@ struct TaskTypesView: View {
                         }
                         .pickerStyle(.wheel)
                     }
-                    ColorPicker("Color", selection: $newTypeColor)
-                    Button("Add") {
+                    ColorPicker("taskTypes.color".localized, selection: $newTypeColor)
+                    Button("common.add".localized) {
                         if !newTypeName.isEmpty {
                             let newType = TaskType(name: newTypeName, icon: newTypeIcon, color: newTypeColor)
                             modelContext.insert(newType)

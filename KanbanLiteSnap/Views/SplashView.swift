@@ -6,14 +6,14 @@ struct SplashView: View {
     @State private var opacity = 0.0
     
     let motivationalQuotes = [
-        "Organize your ideas, achieve your goals",
-        "Every task completed is a step forward",
-        "Focus on what matters most",
-        "Turn your ideas into achievements",
-        "Simple, powerful, effective",
-        "Your productivity companion",
-        "Where ideas become reality",
-        "Stay organized, stay productive"
+        "splash.motivational.1".localized,
+        "splash.motivational.2".localized,
+        "splash.motivational.3".localized,
+        "splash.motivational.4".localized,
+        "splash.motivational.5".localized,
+        "splash.motivational.6".localized,
+        "splash.motivational.7".localized,
+        "splash.motivational.8".localized
     ]
     
     var body: some View {

@@ -1,0 +1,61 @@
+// App
+"app.name" = "KanbanLiteSnap";
+
+// Common
+"common.done" = "Done";
+"common.cancel" = "Cancel";
+"common.add" = "Add";
+"common.delete" = "Delete";
+"common.title" = "Title";
+"common.description" = "Description";
+"common.type" = "Type";
+"common.none" = "None";
+
+// Task Status
+"status.ideas" = "Ideas";
+"status.focus" = "Focus";
+"status.achievements" = "Achievements";
+
+// Task Types
+"taskTypes.title" = "Task Types";
+"taskTypes.name" = "Name";
+"taskTypes.icon" = "Icon";
+"taskTypes.color" = "Color";
+"taskTypes.create" = "Create Task Type";
+
+// Focus View
+"focus.welcome" = "Welcome to your Focus board!";
+"focus.instructions" = "• Here you see the tasks you're actively working on.\n• Mark a task as done with the green checkmark.\n• Use the toolbar to navigate to Ideas, Done, or Task Types.\n• Stay focused and keep making progress!";
+"focus.motivational.1" = "Stay focused and get things done!";
+"focus.motivational.2" = "One step closer to your goals";
+"focus.motivational.3" = "Keep pushing forward";
+"focus.motivational.4" = "You're making progress!";
+"focus.motivational.5" = "Focus brings results";
+
+// Ideas View
+"ideas.welcome" = "Welcome to your Ideas board!";
+"ideas.instructions" = "• Here you can jot down any idea or task you want to remember.\n• Tap the '+' button to add a new idea.\n• Use the blue arrow to move an idea to Focus when you're ready to work on it.\n• Ideas are grouped by type for better organization.";
+"ideas.motivational.1" = "Today is a great day for new ideas!";
+"ideas.motivational.2" = "Let your creativity flow";
+"ideas.motivational.3" = "Every idea matters";
+"ideas.motivational.4" = "Get inspired and jot it down!";
+"ideas.motivational.5" = "The first step is to imagine";
+
+// Achievements View
+"achievements.welcome" = "Welcome to your Achievements board!";
+"achievements.instructions" = "• Here you'll see all the tasks you've completed.\n• Restore a task to Focus with the blue arrow.\n• Remove tasks permanently with the trash icon.\n• Celebrate your progress!";
+
+// Splash Screen
+"splash.motivational.1" = "Organize your ideas, achieve your goals";
+"splash.motivational.2" = "Every task completed is a step forward";
+"splash.motivational.3" = "Focus on what matters most";
+"splash.motivational.4" = "Turn your ideas into achievements";
+"splash.motivational.5" = "Simple, powerful, effective";
+"splash.motivational.6" = "Your productivity companion";
+"splash.motivational.7" = "Where ideas become reality";
+"splash.motivational.8" = "Stay organized, stay productive";
+
+// Welcome Screen
+"welcome.title" = "Welcome to KanbanLiteSnap!";
+"welcome.message" = "To get started, create your first task types. You can choose a name, an icon, and a color for each type.";
+"welcome.createFirstType" = "Create first task type"; 

@@ -1,0 +1,61 @@
+// App
+"app.name" = "KanbanLiteSnap";
+
+// Common
+"common.done" = "Hecho";
+"common.cancel" = "Cancelar";
+"common.add" = "Añadir";
+"common.delete" = "Eliminar";
+"common.title" = "Título";
+"common.description" = "Descripción";
+"common.type" = "Tipo";
+"common.none" = "Ninguno";
+
+// Task Status
+"status.ideas" = "Ideas";
+"status.focus" = "Enfocado";
+"status.achievements" = "Logros";
+
+// Task Types
+"taskTypes.title" = "Tipos de Tarea";
+"taskTypes.name" = "Nombre";
+"taskTypes.icon" = "Icono";
+"taskTypes.color" = "Color";
+"taskTypes.create" = "Crear Tipo de Tarea";
+
+// Focus View
+"focus.welcome" = "¡Bienvenido a tu tablero de Enfoque!";
+"focus.instructions" = "• Aquí ves las tareas en las que estás trabajando activamente.\n• Marca una tarea como completada con la marca verde.\n• Usa la barra de herramientas para navegar a Ideas, Logros o Tipos.\n• ¡Mantente enfocado y sigue progresando!";
+"focus.motivational.1" = "¡Mantente enfocado y haz las cosas!";
+"focus.motivational.2" = "Un paso más cerca de tus metas";
+"focus.motivational.3" = "Sigue avanzando";
+"focus.motivational.4" = "¡Estás progresando!";
+"focus.motivational.5" = "El enfoque trae resultados";
+
+// Ideas View
+"ideas.welcome" = "¡Bienvenido a tu tablero de Ideas!";
+"ideas.instructions" = "• Aquí puedes anotar cualquier idea o tarea que quieras recordar.\n• Toca el botón '+' para añadir una nueva idea.\n• Usa la flecha azul para mover una idea a Enfocado cuando estés listo para trabajar en ella.\n• Las ideas están agrupadas por tipo para mejor organización.";
+"ideas.motivational.1" = "¡Hoy es un gran día para nuevas ideas!";
+"ideas.motivational.2" = "Deja fluir tu creatividad";
+"ideas.motivational.3" = "Cada idea importa";
+"ideas.motivational.4" = "¡Inspírate y anótalo!";
+"ideas.motivational.5" = "El primer paso es imaginar";
+
+// Achievements View
+"achievements.welcome" = "¡Bienvenido a tu tablero de Logros!";
+"achievements.instructions" = "• Aquí verás todas las tareas que has completado.\n• Restaura una tarea a Enfocado con la flecha azul.\n• Elimina tareas permanentemente con el icono de papelera.\n• ¡Celebra tu progreso!";
+
+// Splash Screen
+"splash.motivational.1" = "Organiza tus ideas, alcanza tus metas";
+"splash.motivational.2" = "Cada tarea completada es un paso adelante";
+"splash.motivational.3" = "Enfócate en lo que más importa";
+"splash.motivational.4" = "Convierte tus ideas en logros";
+"splash.motivational.5" = "Simple, potente, efectivo";
+"splash.motivational.6" = "Tu compañero de productividad";
+"splash.motivational.7" = "Donde las ideas se hacen realidad";
+"splash.motivational.8" = "Mantente organizado, mantente productivo";
+
+// Welcome Screen
+"welcome.title" = "¡Bienvenido a KanbanLiteSnap!";
+"welcome.message" = "Para empezar, crea tus primeros tipos de tarea. Puedes elegir un nombre, un icono y un color para cada tipo.";
+"welcome.createFirstType" = "Crear primer tipo de tarea"; 

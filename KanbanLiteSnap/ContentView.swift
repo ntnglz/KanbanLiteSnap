@@ -12,11 +12,11 @@ struct ContentView: View {
     @State private var showingAddType = false
     
     let focusMotivationalTitles = [
-        "Stay focused and get things done!",
-        "One step closer to your goals",
-        "Keep pushing forward",
-        "You're making progress!",
-        "Focus brings results"
+        "focus.motivational.1".localized,
+        "focus.motivational.2".localized,
+        "focus.motivational.3".localized,
+        "focus.motivational.4".localized,
+        "focus.motivational.5".localized
     ]
     @State private var selectedFocusTitle: String = ""
     
@@ -32,14 +32,14 @@ struct ContentView: View {
                     .resizable()
                     .frame(width: 80, height: 80)
                     .foregroundColor(.yellow)
-                Text("¡Bienvenido a KanbanLiteSnap!")
+                Text("welcome.title".localized)
                     .font(.title)
                     .bold()
-                Text("Para empezar, crea tus primeros tipos de tarea. Puedes elegir un nombre, un icono y un color para cada tipo.")
+                Text("welcome.message".localized)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 Button(action: { showingAddType = true }) {
-                    Label("Crear primer tipo de tarea", systemImage: "plus")
+                    Label("welcome.createFirstType".localized, systemImage: "plus")
                         .font(.headline)
                         .padding()
                         .background(Color.accentColor.opacity(0.1))
@@ -58,15 +58,10 @@ struct ContentView: View {
                             .resizable()
                             .frame(width: 256, height: 256)
                             .opacity(0.25)
-                        Text("Welcome to your Focus board!")
+                        Text("focus.welcome".localized)
                             .font(.headline)
                             .opacity(0.25)
-                        Text("""
-• Here you see the tasks you're actively working on.
-• Mark a task as done with the green checkmark.
-• Use the toolbar to navigate to Ideas, Done, or Task Types.
-• Stay focused and keep making progress!
-""")
+                        Text("focus.instructions".localized)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -95,17 +90,17 @@ struct ContentView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button(action: { showingTodoList = true }) {
-                            Label("TODO", systemImage: "list.bullet")
+                            Label("status.ideas".localized, systemImage: "list.bullet")
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: { showingTaskTypes = true }) {
-                            Label("Types", systemImage: "tag")
+                            Label("taskTypes.title".localized, systemImage: "tag")
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: { showingDoneList = true }) {
-                            Label("Done", systemImage: "checkmark.circle")
+                            Label("status.achievements".localized, systemImage: "checkmark.circle")
                         }
                     }
                 }
