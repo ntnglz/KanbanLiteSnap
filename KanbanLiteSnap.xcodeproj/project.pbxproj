@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		EA3E8CF42DC8169F00964DE0 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = EA3E8CF32DC8169800964DE0 /* TODO.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		EA3E8CA32DC7D6CD00964DE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		EA3E8C942DC7D6C800964DE0 /* KanbanLiteSnap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KanbanLiteSnap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3E8CA22DC7D6CD00964DE0 /* KanbanLiteSnapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KanbanLiteSnapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3E8CAC2DC7D6CD00964DE0 /* KanbanLiteSnapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KanbanLiteSnapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA3E8CF32DC8169800964DE0 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		EA3E8C8B2DC7D6C800964DE0 = {
 			isa = PBXGroup;
 			children = (
+				EA3E8CF32DC8169800964DE0 /* TODO.md */,
 				EA3E8C962DC7D6C800964DE0 /* KanbanLiteSnap */,
 				EA3E8CA52DC7D6CD00964DE0 /* Kanban LiteSnapTests */,
 				EA3E8CAF2DC7D6CD00964DE0 /* Kanban LiteSnapUITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3E8CF42DC8169F00964DE0 /* TODO.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

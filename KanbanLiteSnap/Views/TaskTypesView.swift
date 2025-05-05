@@ -8,8 +8,9 @@ struct TaskTypesView: View {
     @Environment(\.dismiss) var dismiss
     @State private var showingAddType = false
     @State private var newTypeName = ""
-    @State private var newTypeIcon = "circle.fill"
+    @State private var newTypeIcon = "bolt.fill"
     @State private var newTypeColor = Color.blue
+    let icons = ["bolt.fill", "list.bullet", "star.fill", "tag.fill", "heart.fill", "cart.fill", "book.fill", "person.fill", "briefcase.fill", "pencil", "calendar", "checkmark.circle.fill"]
     
     var body: some View {
         NavigationView {
@@ -23,6 +24,11 @@ struct TaskTypesView: View {
                         Text(type.name)
                         Spacer()
                         Button(action: {
+                            let tasksWithType = try? modelContext.fetch(FetchDescriptor<Task>())
+                            let filteredTasks = tasksWithType?.filter { $0.taskType?.id == type.id } ?? []
+                            for task in filteredTasks {
+                                task.taskType = nil
+                            }
                             modelContext.delete(type)
                             try? modelContext.save()
                         }) {
@@ -44,16 +50,29 @@ struct TaskTypesView: View {
             .sheet(isPresented: $showingAddType) {
                 Form {
                     TextField("Type Name", text: $newTypeName)
-                    TextField("Icon Name", text: $newTypeIcon)
+                    Section(header: Text("Icono")) {
+                        Picker("Icono", selection: $newTypeIcon) {
+                            ForEach(icons, id: \.self) { icon in
+                                HStack {
+                                    Image(systemName: icon)
+                                    Text(icon)
+                                }.tag(icon)
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                    }
                     ColorPicker("Color", selection: $newTypeColor)
                     Button("Add") {
-                        let newType = TaskType(name: newTypeName, icon: newTypeIcon, color: newTypeColor)
-                        modelContext.insert(newType)
-                        try? modelContext.save()
-                        showingAddType = false
-                        newTypeName = ""
-                        newTypeIcon = "circle.fill"
-                        newTypeColor = .blue
+                        if !newTypeName.isEmpty {
+                            let newType = TaskType(name: newTypeName, icon: newTypeIcon, color: newTypeColor)
+                            modelContext.insert(newType)
+                            try? modelContext.save()
+                            newTypeName = ""
+                            newTypeIcon = "bolt.fill"
+                            newTypeColor = .blue
+                            showingAddType = false
+                            dismiss()
+                        }
                     }
                 }
             }

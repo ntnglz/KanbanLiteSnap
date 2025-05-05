@@ -8,28 +8,28 @@ struct TodoListView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var showingAddTask = false
     @State private var expandedTypes: Set<UUID> = []
+    @Environment(\.dismiss) var dismiss
     private let noTypeUUID = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
     
-    var groupedTasks: [(type: TaskType?, tasks: [Task])] {
+    var groupedTasks: [(groupId: UUID, type: TaskType?, tasks: [Task])] {
         let ideas = tasks.filter { $0.status == .ideas }
         let grouped = Dictionary(grouping: ideas, by: { $0.taskType })
         return grouped
             .sorted { (lhs, rhs) in (lhs.key?.name ?? "") < (rhs.key?.name ?? "") }
-            .map { (key, value) in (type: key, tasks: value) }
+            .map { (key, value) in (groupId: key?.id ?? noTypeUUID, type: key, tasks: value) }
     }
     
     var allGroupIds: [UUID] {
-        groupedTasks.map { $0.type?.id ?? noTypeUUID }
+        groupedTasks.map { $0.groupId }
     }
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(groupedTasks.indices, id: \.self) { idx in
-                    let group = groupedTasks[idx]
-                    let groupId = group.type?.id ?? noTypeUUID
+                ForEach(groupedTasks, id: \.groupId) { group in
+                    let groupId = group.groupId
                     TaskTypeSectionView(
-                        group: group,
+                        group: (type: group.type, tasks: group.tasks),
                         isExpanded: expandedTypes.contains(groupId),
                         toggle: {
                             if expandedTypes.contains(groupId) {
@@ -55,6 +55,11 @@ struct TodoListView: View {
                     }
                 }
             }
+            .navigationBarItems(
+                leading: Button("Done") {
+                    dismiss()
+                }
+            )
             .sheet(isPresented: $showingAddTask) {
                 AddTaskSheet(taskTypes: taskTypes) { title, description, type in
                     let newTask = Task(title: title, details: description, taskType: type, status: .ideas)

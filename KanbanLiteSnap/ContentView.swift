@@ -9,56 +9,84 @@ struct ContentView: View {
     @State private var showingAddTask = false
     @State private var showingDoneList = false
     @State private var showingTaskTypes = false
+    @State private var showingAddType = false
     
     var focusTasks: [Task] {
         tasks.filter { $0.status == .focus }
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                List {
-                    ForEach(focusTasks) { task in
-                        TaskRow(task: task, moveToDone: {
-                            task.status = .achievements
-                            try? modelContext.save()
-                        })
+        if taskTypes.isEmpty {
+            VStack(spacing: 32) {
+                Spacer()
+                Image(systemName: "bolt.fill")
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .foregroundColor(.yellow)
+                Text("¡Bienvenido a KanbanLiteSnap!")
+                    .font(.title)
+                    .bold()
+                Text("Para empezar, crea tus primeros tipos de tarea. Puedes elegir un nombre, un icono y un color para cada tipo.")
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                Button(action: { showingAddType = true }) {
+                    Label("Crear primer tipo de tarea", systemImage: "plus")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.accentColor.opacity(0.1))
+                        .cornerRadius(12)
+                }
+                Spacer()
+            }
+            .sheet(isPresented: $showingAddType) {
+                AddTaskTypeSheet()
+            }
+        } else {
+            NavigationView {
+                VStack {
+                    List {
+                        ForEach(focusTasks) { task in
+                            TaskRow(task: task, moveToDone: {
+                                task.status = .achievements
+                                try? modelContext.save()
+                            })
+                        }
                     }
                 }
-            }
-            .navigationTitle(TaskStatus.focus.displayName)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: { showingTodoList = true }) {
-                        Label("TODO", systemImage: "list.bullet")
+                .navigationTitle(TaskStatus.focus.displayName)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: { showingTodoList = true }) {
+                            Label("TODO", systemImage: "list.bullet")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: { showingTaskTypes = true }) {
+                            Label("Types", systemImage: "tag")
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: { showingDoneList = true }) {
+                            Label("Done", systemImage: "checkmark.circle")
+                        }
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingTaskTypes = true }) {
-                        Label("Types", systemImage: "tag")
+                .sheet(isPresented: $showingTodoList) {
+                    TodoListView()
+                }
+                .sheet(isPresented: $showingAddTask) {
+                    AddTaskSheet(taskTypes: taskTypes) { title, details, type in
+                        let newTask = Task(title: title, details: details, taskType: type, status: .focus)
+                        modelContext.insert(newTask)
+                        try? modelContext.save()
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingDoneList = true }) {
-                        Label("Done", systemImage: "checkmark.circle")
-                    }
+                .sheet(isPresented: $showingDoneList) {
+                    DoneListView()
                 }
-            }
-            .sheet(isPresented: $showingTodoList) {
-                TodoListView()
-            }
-            .sheet(isPresented: $showingAddTask) {
-                AddTaskSheet(taskTypes: taskTypes) { title, details, type in
-                    let newTask = Task(title: title, details: details, taskType: type, status: .focus)
-                    modelContext.insert(newTask)
-                    try? modelContext.save()
+                .sheet(isPresented: $showingTaskTypes) {
+                    TaskTypesView()
                 }
-            }
-            .sheet(isPresented: $showingDoneList) {
-                DoneListView()
-            }
-            .sheet(isPresented: $showingTaskTypes) {
-                TaskTypesView()
             }
         }
     }
@@ -90,6 +118,52 @@ struct TaskRow: View {
                 Image(systemName: "checkmark.circle")
                     .foregroundColor(.green)
             }
+        }
+    }
+}
+
+// Sheet para crear un nuevo tipo de tarea desde la pantalla de bienvenida
+struct AddTaskTypeSheet: View {
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) var dismiss
+    @State private var name = ""
+    @State private var selectedIcon = "bolt.fill"
+    @State private var color = Color.blue
+    let icons = ["bolt.fill", "list.bullet", "star.fill", "tag.fill", "heart.fill", "cart.fill", "book.fill", "person.fill", "briefcase.fill", "pencil", "calendar", "checkmark.circle.fill"]
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("Nombre")) {
+                    TextField("Nombre del tipo", text: $name)
+                }
+                Section(header: Text("Icono")) {
+                    Picker("Icono", selection: $selectedIcon) {
+                        ForEach(icons, id: \.self) { icon in
+                            HStack {
+                                Image(systemName: icon)
+                                Text(icon)
+                            }.tag(icon)
+                        }
+                    }
+                    .pickerStyle(.wheel)
+                }
+                Section(header: Text("Color")) {
+                    ColorPicker("Color", selection: $color)
+                }
+            }
+            .navigationTitle("Nuevo tipo de tarea")
+            .navigationBarItems(
+                leading: Button("Cancelar") { dismiss() },
+                trailing: Button("Crear") {
+                    if !name.isEmpty {
+                        let newType = TaskType(name: name, icon: selectedIcon, color: color)
+                        modelContext.insert(newType)
+                        try? modelContext.save()
+                        dismiss()
+                    }
+                }
+            )
         }
     }
 }
