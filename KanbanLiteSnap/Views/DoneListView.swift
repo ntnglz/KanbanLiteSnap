@@ -14,7 +14,7 @@ struct DoneListView: View {
     @State private var taskToDelete: Task?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack(alignment: .bottom) {
                 VStack(spacing: 16) {
                     Image("AppLogo")

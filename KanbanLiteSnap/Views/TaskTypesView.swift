@@ -13,7 +13,7 @@ struct TaskTypesView: View {
     let icons = ["bolt.fill", "list.bullet", "star.fill", "tag.fill", "heart.fill", "cart.fill", "book.fill", "person.fill", "briefcase.fill", "pencil", "calendar", "checkmark.circle.fill"]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(taskTypes) { type in
                     HStack {

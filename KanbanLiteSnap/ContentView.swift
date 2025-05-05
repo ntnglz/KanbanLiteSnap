@@ -51,7 +51,7 @@ struct ContentView: View {
                 AddTaskTypeSheet()
             }
         } else {
-            NavigationView {
+            NavigationStack {
                 ZStack(alignment: .bottom) {
                     VStack(spacing: 16) {
                         Image("AppLogo")
@@ -165,7 +165,7 @@ struct AddTaskTypeSheet: View {
     let icons = ["bolt.fill", "list.bullet", "star.fill", "tag.fill", "heart.fill", "cart.fill", "book.fill", "person.fill", "briefcase.fill", "pencil", "calendar", "checkmark.circle.fill"]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Nombre")) {
                     TextField("Nombre del tipo", text: $name)

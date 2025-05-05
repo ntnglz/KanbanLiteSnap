@@ -32,7 +32,7 @@ struct TodoListView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack(alignment: .bottom) {
                 VStack(spacing: 16) {
                     Image("AppLogo")
@@ -160,7 +160,7 @@ struct AddTaskSheet: View {
     @State private var selectedTaskType: TaskType?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("common.title".localized)) {
                     TextField("common.title".localized, text: $taskTitle)

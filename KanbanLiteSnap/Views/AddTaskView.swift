@@ -8,7 +8,7 @@ struct AddTaskView: View {
     @State private var selectedTaskType: TaskType?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section(header: Text("Task Details")) {
                     TextField("Title", text: $taskTitle)
